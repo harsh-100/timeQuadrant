@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Quadrant</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- <h1>Manage your Time Effectively</h1> -->
+    <div class="top left" id="task-topLeft"><p> <h2> Urgent & Important</h2>
+        <label for="topLeft" style="color: #00ff0d" > </label>
+        <input type="text" id="topLeft" placeholder="Enter task">
+        <button id="button-topLeft">+</button>
+
+        
+    </p></div>
+
+
+    <div class="top right"><h2> Not Urgent ,yet Important</h2>
+        <label for="topLeft" style="color: #00ff0d" ></label>
+        <input type="text" id="topRight" placeholder="Enter task">
+        <button id="">+</button>
+    </div>
+
+    <div class="bottom left"><h2> Urgent yet Not Important</h2>
+        <label for="topLeft" style="color: #00ff0d" ></label>
+        <input type="text" id="bottomLeft" placeholder="Enter task">
+        <button>+</button>
+    </div>
+
+
+    <div class="bottom right"><h2> Not Urgent & Not Important</h2>
+        <label for="topLeft" style="color: #00ff0d" > </label>
+        <input type="text" id="bottomRight" placeholder="Enter task">
+        <button>+</button>
+    
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+
+    $('#button-topLeft').on('click',function(){
+       var data =  $('#topLeft').val()
+       $('#task-topLeft').append(`<ul><li><p>${data}</p></li></ul>`)
+    
+    })
+</script>
+</html>
