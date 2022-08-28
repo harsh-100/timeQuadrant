@@ -40,11 +40,60 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+     
+  if(localStorage.getItem(`counter-topLeft`)){
+    var counter = parseInt(localStorage.getItem(`counter-topLeft`))
+
+    for (let i = 1 ; i<=counter ; i++){
+
+        var allTaskEntered = localStorage.getItem(`taskEntered-${i}`)
+        if(allTaskEntered){
+
+            $('#task-topLeft').append(`<ul><li><p id=taskEntered-${i}>${allTaskEntered}</p></li></ul>`) 
+        }
+        //$('#task-topLeft').append(` `) 
+      
+    }
+  }
+  else{
+      var counter = 0
+  }
 
     $('#button-topLeft').on('click',function(){
+        //alert("this is worked")
        var data =  $('#topLeft').val()
-       $('#task-topLeft').append(`<ul><li><p>${data}</p></li></ul>`)
-    
+       if(data.length>0){
+        counter ++;
+            localStorage.setItem(`counter-topLeft`,counter)
+           // localStorage.setItemO(`topLeft-${}`)
+           //alert(`The number of times the button got pressed - ${counter} `)
+
+           $('#task-topLeft').append(`<ul ><li><p id=taskEntered-${counter} >${data}&nbsp; &nbsp; <button id= topLeftBtn-${counter} > x </button></p></li></ul>`)  
+           var taskEntered = $(`#taskEntered-${counter}`).html(); 
+           //var taskEntered2 = $(`#task-${counter}`).text();
+            //console.log(taskEntered2)
+           console.log(taskEntered)
+          //alert(taskEntered)
+             localStorage.setItem(`taskEntered-${counter}`,taskEntered)
+           $('#topLeft').val('')    //for making the input field empty after pressing the button 
+       }
     })
+    //for button of every task
+    for (var j = 1; j <= counter ; j++){
+        $(`#topLeftBtn-${j}`).on('click',function(){
+          //alert($(this).closest('p').html())
+          alert($(this).closest('p').attr('id'))
+          var removedTask = $(this).closest('p').attr('id')
+          console.log(removedTask)
+          localStorage.removeItem(removedTask)
+          $(this).closest('ul').remove()
+        })
+       
+     
+    }
+
+  
+   
+  
 </script>
 </html>
