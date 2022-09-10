@@ -18,29 +18,30 @@
     </p></div>
 
 
-    <div class="top right"><h2> Not Urgent ,yet Important</h2>
-        <label for="topLeft" style="color: #00ff0d" ></label>
+    <div class="top right" id="task-topRight"><h2> Not Urgent ,yet Important</h2>
+        <label for="topRight" style="color: #00ff0d" ></label>
         <input type="text" id="topRight" placeholder="Enter task">
-        <button id="">+</button>
+        <button id="button-topRight">+</button>
     </div>
 
-    <div class="bottom left"><h2> Urgent yet Not Important</h2>
-        <label for="topLeft" style="color: #00ff0d" ></label>
+    <div class="bottom left" id="task-bottomLeft"><h2> Urgent yet Not Important</h2>
+        <label for="bottomLeft" style="color: #00ff0d" ></label>
         <input type="text" id="bottomLeft" placeholder="Enter task">
-        <button>+</button>
+        <button id="button-bottomLeft">+</button>
     </div>
 
 
-    <div class="bottom right"><h2> Not Urgent & Not Important</h2>
-        <label for="topLeft" style="color: #00ff0d" > </label>
+    <div class="bottom right"  id="task-bottomRight"><h2> Not Urgent & Not Important</h2>
+        <label for="bottomRight" style="color: #00ff0d" > </label>
         <input type="text" id="bottomRight" placeholder="Enter task">
-        <button>+</button>
+        <button id="button-bottomRight">+</button>
     
     </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
      
+    //This is for Top-left quadrant
   if(localStorage.getItem(`counter-topLeft`)){
     var counter = parseInt(localStorage.getItem(`counter-topLeft`))
 
@@ -79,21 +80,177 @@
        }
     })
     //for button of every task
-    for (var j = 1; j <= counter ; j++){
+    for (let j = 1; j <= counter ; j++){
         $(`#topLeftBtn-${j}`).on('click',function(){
           //alert($(this).closest('p').html())
          // alert($(this).closest('p').attr('id'))
-          var removedTask = $(this).closest('p').attr('id')
+          let removedTask = $(this).closest('p').attr('id')
           console.log(removedTask)
           localStorage.removeItem(removedTask)
           $(this).closest('ul').remove()
-        })
-       
-     
+        })           
     }
 
   
-   
+
+    //For top Right section 
+
+    if(localStorage.getItem(`counter-topRight`)){
+        var counterTopRight = parseInt(localStorage.getItem(`counter-topRight`))
+    
+        for (let i = 1 ; i<=counterTopRight ; i++){
+    
+            var TaskEnteredTopRight = localStorage.getItem(`taskEnteredTopRight-${i}`)
+            if(TaskEnteredTopRight){
+    
+                $('#task-topRight').append(`<ul><li><p id=taskEnteredTopRight-${i}>${TaskEnteredTopRight}</p></li></ul>`) 
+            }
+            //$('#task-topLeft').append(` `) 
+          
+        }
+      }
+      else{
+          var counterTopRight = 0
+      }
+
+   $('#button-topRight').on('click',function(){
+        //alert("this is worked")
+       var dataTopRight =  $('#topRight').val()
+       console.log(dataTopRight)
+       if(dataTopRight.length>0){
+        counterTopRight ++;
+            localStorage.setItem(`counter-topRight`,counterTopRight)
+           // localStorage.setItemO(`topLeft-${}`)
+           //alert(`The number of times the button got pressed - ${counter} `)
+
+           $('#task-topRight').append(`<ul ><li><p id=taskEnteredTopRight-${counterTopRight} >${dataTopRight}&nbsp; &nbsp; <button id= topRightBtn-${counterTopRight} > x </button></p></li></ul>`)  
+           var taskEnteredTopRight = $(`#taskEnteredTopRight-${counterTopRight}`).html(); 
+           //var taskEntered2 = $(`#task-${counter}`).text();
+            //console.log(taskEntered2)
+           console.log(taskEnteredTopRight)
+          //alert(taskEntered)
+             localStorage.setItem(`taskEnteredTopRight-${counterTopRight}`,taskEnteredTopRight)
+           $('#topRight').val('')    //for making the input field empty after pressing the button 
+       }
+    })
+    for (let j = 1; j <= counterTopRight ; j++){
+        $(`#topRightBtn-${j}`).on('click',function(){
+          //alert($(this).closest('p').html())
+         // alert($(this).closest('p').attr('id'))
+          let removedTask = $(this).closest('p').attr('id')
+          console.log(removedTask)
+          localStorage.removeItem(removedTask)
+          $(this).closest('ul').remove()
+        })           
+    }
+
+
+    //for the bottom left section 
+
+    if(localStorage.getItem(`counter-BottomLeft`)){
+        var counterBottomLeft = parseInt(localStorage.getItem(`counter-BottomLeft`))
+    
+        for (let i = 1 ; i<=counterBottomLeft ; i++){
+    
+            var TaskEnteredBottomLeft = localStorage.getItem(`taskEnteredBottomLeft-${i}`)
+            if(TaskEnteredBottomLeft){
+    
+                $('#task-bottomLeft').append(`<ul><li><p id=taskEnteredBottomLeft-${i}>${TaskEnteredBottomLeft}</p></li></ul>`) 
+            }
+            //$('#task-topLeft').append(` `) 
+          
+        }
+      }
+      else{
+          var counterBottomLeft = 0
+      }
+
+      $('#button-bottomLeft').on('click',function(){
+        //alert("this is worked")
+       var dataBottomLeft =  $('#bottomLeft').val()
+       console.log(dataBottomLeft)
+       if(dataBottomLeft.length>0){
+        counterBottomLeft ++;
+            localStorage.setItem(`counter-BottomLeft`,counterBottomLeft)
+           // localStorage.setItemO(`topLeft-${}`)
+           //alert(`The number of times the button got pressed - ${counter} `)
+
+           $('#task-bottomLeft').append(`<ul ><li><p id=taskEnteredBottomLeft-${counterBottomLeft} >${dataBottomLeft}&nbsp; &nbsp; <button id= bottomLeftBtn-${counterBottomLeft} > x </button></p></li></ul>`)  
+           var taskEnteredBottomLeft = $(`#taskEnteredBottomLeft-${counterBottomLeft}`).html(); 
+           //var taskEntered2 = $(`#task-${counter}`).text();
+            //console.log(taskEntered2)
+           console.log(taskEnteredBottomLeft)
+          //alert(taskEntered)
+             localStorage.setItem(`taskEnteredBottomLeft-${counterBottomLeft}`,taskEnteredBottomLeft)
+           $('#bottomLeft').val('')    //for making the input field empty after pressing the button 
+       }
+    })
+    for (let j = 1; j <= counterBottomLeft ; j++){
+        $(`#bottomLeftBtn-${j}`).on('click',function(){
+          //alert($(this).closest('p').html())
+         // alert($(this).closest('p').attr('id'))
+          let removedTask = $(this).closest('p').attr('id')
+          console.log(removedTask)
+          localStorage.removeItem(removedTask)
+          $(this).closest('ul').remove()
+        })           
+    }
+
+
+
+
+    //for the bottom right section 
+    if(localStorage.getItem(`counter-BottomRight`)){
+        var counterBottomRight = parseInt(localStorage.getItem(`counter-BottomRight`))
+    
+        for (let i = 1 ; i<=counterBottomRight ; i++){
+    
+            var TaskEnteredBottomRight = localStorage.getItem(`taskEnteredBottomRight-${i}`)
+            if(TaskEnteredBottomRight){
+    
+                $('#task-bottomRight').append(`<ul><li><p id=taskEnteredBottomRight-${i}>${TaskEnteredBottomRight}</p></li></ul>`) 
+            }
+            //$('#task-topLeft').append(` `) 
+          
+        }
+      }
+      else{
+          var counterBottomRight = 0
+      }
+
+      $('#button-bottomRight').on('click',function(){
+        //alert("this is worked")
+       var dataBottomRight =  $('#bottomRight').val()
+       console.log(dataBottomRight)
+       if(dataBottomRight.length>0){
+        counterBottomRight ++;
+            localStorage.setItem(`counter-BottomRight`,counterBottomRight)
+           // localStorage.setItemO(`topLeft-${}`)
+           //alert(`The number of times the button got pressed - ${counter} `)
+
+           $('#task-bottomRight').append(`<ul ><li><p id=taskEnteredBottomRight-${counterBottomRight} >${dataBottomRight}&nbsp; &nbsp; <button id= bottomRightBtn-${counterBottomRight} > x </button></p></li></ul>`)  
+           var taskEnteredBottomRight = $(`#taskEnteredBottomRight-${counterBottomRight}`).html(); 
+           //var taskEntered2 = $(`#task-${counter}`).text();
+            //console.log(taskEntered2)
+           console.log(taskEnteredBottomRight)
+          //alert(taskEntered)
+             localStorage.setItem(`taskEnteredBottomRight-${counterBottomRight}`,taskEnteredBottomRight)
+           $('#bottomRight').val('')    //for making the input field empty after pressing the button 
+       }
+    })
+    for (let j = 1; j <= counterBottomRight ; j++){
+        $(`#bottomRightBtn-${j}`).on('click',function(){
+          //alert($(this).closest('p').html())
+         // alert($(this).closest('p').attr('id'))
+          let removedTask = $(this).closest('p').attr('id')
+          console.log(removedTask)
+          localStorage.removeItem(removedTask)
+          $(this).closest('ul').remove()
+        })           
+    }
+
+
+
   
 </script>
 </html>
